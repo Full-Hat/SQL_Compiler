@@ -20,7 +20,7 @@ add_executable(${project_name} main.cpp ${SOURCE})
 
 enable_testing()
 
-add_executable(projectName_test test/parser/test.cpp ${SOURCE})
+add_executable(${project_name}_test_parser test/parser/test.cpp ${SOURCE})
 find_package(GTest CONFIG REQUIRED)
-target_link_libraries(projectName_test PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(${project_name}_test_parser PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(AllTestsInMain projectName_test)
