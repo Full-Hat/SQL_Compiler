@@ -9,6 +9,7 @@ if ! command -v git &> /dev/null; then
     exit 1
 fi
 
+ls -a
 if [ ! -d "${VCPKG_DIR}" ]; then
     echo "vcpkg not found. Cloning vcpkg repository..."
     git clone "${VCPKG_REPO_URL}" "${VCPKG_DIR}"
@@ -16,7 +17,6 @@ fi
 
 echo "Building vcpkg..."
 cd "${VCPKG_DIR}"
-ls -a
 ./bootstrap-vcpkg.sh 
 
 echo "Done!"
