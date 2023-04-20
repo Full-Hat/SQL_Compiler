@@ -16,6 +16,7 @@ fi
 
 echo "Building vcpkg..."
 cd "${VCPKG_DIR}"
+ls -a
 ./bootstrap-vcpkg.sh 
 
 echo "Done!"
