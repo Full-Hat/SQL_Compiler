@@ -14,6 +14,7 @@ jobs:
         sudo apt-get install -y make cmake
     - name: Configure and build
       run: |
+        bash init.sh
         mkdir build
         cd build
         cmake ..
