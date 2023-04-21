@@ -4,7 +4,7 @@ on:
     branches:
       - '*'
 jobs:
-  build-and-test:
+  build-and-test-Linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,6 +22,29 @@ jobs:
         cd build
         cmake -DMAIN=OFF -DTEST_PARSER=ON ..
         make
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure --timeout 10 --verbose -R "SQL_compiler_test_parser"
+  build-and-test-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Install dependencies
+      run: |
+        choco install -y make
+        choco install -y mingw
+        choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+        git submodule update --init
+    - name: Configure and build
+      run: |
+        bash init.sh
+        mkdir build
+        cd build
+        cmake -G "MinGW Makefiles" -DMAIN=OFF -DTEST_PARSER=ON ..
+        mingw32-make.exe
     - name: Run tests
       run: |
         cd build
