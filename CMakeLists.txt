@@ -17,7 +17,7 @@ project(
     DESCRIPTION "project description"
 )
 
-set(SOURCE )
+set(SOURCE parser/include/parser.cpp)
 if(MAIN)
     add_executable(${project_name} main.cpp ${SOURCE})
 endif(MAIN)
