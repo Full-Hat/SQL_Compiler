@@ -40,7 +40,7 @@ jobs:
         git submodule update --init
     - name: Configure and build
       run: |
-        bash init.sh
+        init.bat
         mkdir build
         cd build
         cmake -G "MinGW Makefiles" -DMAIN=OFF -DTEST_PARSER=ON ..
