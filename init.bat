@@ -1,21 +1,21 @@
-#!/bin/bash
+@echo off
 
-VCPKG_REPO_URL="https://github.com/microsoft/vcpkg.git"
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-VCPKG_DIR="${SCRIPT_DIR}/vcpkg"
+set VCPKG_REPO_URL="https://github.com/microsoft/vcpkg.git"
+set "SCRIPT_DIR=%~dp0"
+set "VCPKG_DIR=%SCRIPT_DIR%\vcpkg"
 
-if ! command -v git &> /dev/null; then
-    echo "git command not found. Please install git and try again."
-    exit 1
-fi
+where git >nul 2>nul || (
+    echo git command not found. Please install git and try again.
+    exit /b 1
+)
 
-if [ ! -d "${VCPKG_DIR}" ]; then
-    echo "vcpkg not found. Cloning vcpkg repository..."
-    git clone "${VCPKG_REPO_URL}" "${VCPKG_DIR}"
-fi
+if not exist "%VCPKG_DIR%" (
+    echo vcpkg not found. Cloning vcpkg repository...
+    git clone %VCPKG_REPO_URL% %VCPKG_DIR%
+)
 
-echo "Building vcpkg..."
-cd "${VCPKG_DIR}"
-./bootstrap-vcpkg.bat
+echo Building vcpkg...
+cd /d "%VCPKG_DIR%"
+.\bootstrap-vcpkg.bat
 
-echo "Done!"
+echo Done!
