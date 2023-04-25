@@ -17,10 +17,14 @@ project(
     DESCRIPTION "project description"
 )
 
-set(SOURCE parser/include/parser.cpp)
+set(SOURCE parser/include/parser.cpp
+    Utils/Containers/tree.cpp
+    Utils/Containers/vector.cpp)
 if(MAIN)
     add_executable(${project_name} main.cpp ${SOURCE})
 endif(MAIN)
+
+include_directories(${CMAKE_SOURCE_DIR}/Utils)
 
 # libraries
 

@@ -1,24 +1,6 @@
-#include <algorithm>
-#include <utility>
 #include <vector>
 
-template <typename Key, typename T>
-class vector 
-{
-protected:
-    std::vector<std::pair<Key, T>> m_data;
-
-public:
-    void push_back(const Key &_key, const T &_value)
-    {
-        m_data.push_back({ _key, _value });
-    }
-    T operator[] (const Key &_key)
-    {
-        const auto it = std::find_if(m_data->begin(), m_data->end(), [&](const auto el) { return el.first == _key; });
-        return *it;
-    }
-};
+#include "vector.h"
 
 template <typename Key, typename T>
 class tree {
