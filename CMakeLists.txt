@@ -33,7 +33,7 @@ find_package(GTest CONFIG REQUIRED)
 
 if(TEST_PARSER)
     add_executable(${project_name}_test_parser test/parser/test.cpp ${SOURCE})
-    add_test(test_parser projectName_test)
+    add_test(test_parser ${project_name}_test_parser)
     target_link_libraries(${project_name}_test_parser PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 endif(TEST_PARSER)
 
