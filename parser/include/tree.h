@@ -15,7 +15,7 @@ public:
     }
     T operator[] (const Key &_key)
     {
-        const auto it = std::find(m_data->begin(), m_data->end(), [&](const auto el) { return el.first == _key; });
+        const auto it = std::find_if(m_data->begin(), m_data->end(), [&](const auto el) { return el.first == _key; });
         return *it;
     }
 };
