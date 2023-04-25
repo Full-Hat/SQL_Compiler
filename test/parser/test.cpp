@@ -2,11 +2,6 @@
 
 #include "Containers/test.h"
 
-TEST(vector, constructer)
-{
-    EXPECT_TRUE(true);
-}
-
 int main(int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
