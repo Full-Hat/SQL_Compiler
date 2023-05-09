@@ -6,7 +6,8 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_C_COMPILER clang)
 
 option(MAIN "compiler main file" ON)
-option(TEST_PARSER "test parser" OFF)
+option(TEST_PARSER "test parser" ON)
+option(TEST_UTILS "test utils" ON)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
@@ -31,9 +32,15 @@ include_directories(${CMAKE_SOURCE_DIR}/Utils)
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
 
+set(GTEST_LIBS GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 if(TEST_PARSER)
     add_executable(${project_name}_test_parser test/parser/test.cpp ${SOURCE})
     add_test(test_parser ${project_name}_test_parser)
-    target_link_libraries(${project_name}_test_parser PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+    target_link_libraries(${project_name}_test_parser PRIVATE ${GTEST_LIBS})
 endif(TEST_PARSER)
 
+if(TEST_UTILS)
+    add_executable(${project_name}_test_utils Utils/Containers/test.cpp ${SOURCE})
+    add_test(test_utils ${project_name}_test_utils)
+    target_link_libraries(${project_name}_test_utils PRIVATE ${GTEST_LIBS})
+endif(TEST_UTILS)
