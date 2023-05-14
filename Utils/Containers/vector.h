@@ -1,7 +1,7 @@
 // -*- C++ -*-
 //===----------------------------------------------------------------------===//
 //
-// Part of FullHat library, created to add to std::vector additional operators
+// Part of FullHat library, created to add to std::vector additional methods
 //
 //===----------------------------------------------------------------------===//
 
@@ -23,9 +23,15 @@ protected:
     using p_t = parent_type_name;
     #define delegate_parent(what) this->::parent_type_name::what
 public:
-    constexpr void push_back(const Key &_key, const T &_value)
+    using std::vector<std::pair<Key, T>>::begin;
+    using std::vector<std::pair<Key, T>>::end;
+    /*constexpr void push_back(const Key &_key, const T &_value)
     {
         p_t::push_back({ _key, _value });
+    }*/
+    constexpr void push_back(const Key &_key, T &&_value)
+    {
+        p_t::push_back({ _key, std::forward<T>(_value) });
     }
     constexpr T operator[] (const Key &_key)
     {

@@ -12,8 +12,12 @@ public:
     constexpr unique_ptr() = default;
     constexpr unique_ptr(T* _value) : m_value(_value) 
     {
-        _value = nullptr;
+        //_value = nullptr;
     }
+    /*constexpr unique_ptr(const unique_ptr &_value)
+    {
+
+    }*/
     constexpr unique_ptr(unique_ptr &_value)
     {
         m_value = _value.m_value;

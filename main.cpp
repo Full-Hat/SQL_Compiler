@@ -3,10 +3,23 @@
 #include <functional>
 #include <vector>
 
+class A
+{
+public:
+    A() = default;
+
+    A(A &&a) = default;
+    //A(const A &a)  = default;
+};
+
 int main()
 {
-    tree<int, int> t;
+    std::vector<A> vec;
+    A &&a = A();
+    vec.push_back(std::move(a));
 
-    t.add_value<int>(std::rand(), 10);
+    //tree<int, int> t;
+
+    //t.add_value<int>(std::rand(), 10);
     return 0;
 }
